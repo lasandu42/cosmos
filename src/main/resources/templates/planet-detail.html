@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title th:text="${planet.name} + ' — Cosmos'">Planet — Cosmos</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Inter:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+    <link rel="stylesheet" th:href="@{/css/planet-detail.css}" />
+</head>
+<body th:style="'--planet-color: ' + ${planet.themeColor} + '; --planet-color-2: ' + ${planet.themeColorSecondary}">
+
+<canvas id="starfield"></canvas>
+<div class="nebula nebula-1"></div>
+<div class="nebula nebula-2"></div>
+
+<a href="/planets" class="back-link">&larr; Back to Navigation</a>
+
+<main class="detail-layout">
+
+    <div class="detail-sphere-wrap">
+        <div class="detail-sphere">
+            <span class="detail-symbol" th:text="${planet.symbol}">☉</span>
+        </div>
+    </div>
+
+    <div class="detail-info">
+        <p class="eyebrow">MISSION TELEMETRY // <span th:text="${planet.name}">PLANET</span></p>
+        <h1 class="detail-name" th:text="${planet.name}">Planet</h1>
+        <p class="detail-nickname" th:text="${planet.nickname}">Nickname</p>
+
+        <p class="detail-description" th:text="${planet.description}">
+            Description.
+        </p>
+
+        <div class="detail-stats">
+            <div class="detail-stat">
+                <span class="detail-stat-label">SURFACE GRAVITY</span>
+                <span class="detail-stat-value" th:text="${planet.gravityPercent} + '% of Earth'">0%</span>
+            </div>
+            <div class="detail-stat">
+                <span class="detail-stat-label">KNOWN MOONS</span>
+                <span class="detail-stat-value" th:text="${planet.moonCount}">0</span>
+            </div>
+        </div>
+    </div>
+
+</main>
+
+<script th:src="@{/js/stars.js}"></script>
+
+</body>
+</html>

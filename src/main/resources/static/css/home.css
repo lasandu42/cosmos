@@ -1,0 +1,165 @@
+/* ============================================
+   STARFIELD CANVAS
+   Fixed + full-viewport so it sits behind
+   everything else regardless of scroll.
+   ============================================ */
+#starfield {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    background: radial-gradient(ellipse at 50% 30%, #0d1440 0%, var(--color-void) 70%);
+}
+
+/* ============================================
+   HUD FRAME
+   The signature element. Corner brackets +
+   live readouts, like a cockpit display
+   framing the viewport.
+   ============================================ */
+.hud-frame {
+    position: fixed;
+    inset: var(--space-4);
+    z-index: 2;
+    pointer-events: none; /* clicks pass through to page beneath */
+}
+
+.hud-corner {
+    position: absolute;
+    width: 28px;
+    height: 28px;
+    border: 1.5px solid rgba(92, 247, 255, 0.5);
+}
+.hud-corner.tl { top: 0; left: 0; border-right: none; border-bottom: none; }
+.hud-corner.tr { top: 0; right: 0; border-left: none; border-bottom: none; }
+.hud-corner.bl { bottom: 0; left: 0; border-right: none; border-top: none; }
+.hud-corner.br { bottom: 0; right: 0; border-left: none; border-top: none; }
+
+.hud-readout {
+    position: absolute;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.05em;
+    color: var(--color-muted);
+    text-transform: uppercase;
+}
+.hud-readout.top-left { top: 8px; left: 40px; }
+.hud-readout.top-right { top: 8px; right: 40px; }
+.hud-readout.bottom-left { bottom: 8px; left: 40px; }
+.hud-readout.bottom-right { bottom: 8px; right: 40px; }
+
+.hud-ok {
+    color: var(--color-cyan);
+}
+.hud-version {
+    color: var(--color-purple);
+}
+
+/* ============================================
+   HERO SECTION
+   ============================================ */
+.hero {
+    position: relative;
+    z-index: 1;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: var(--space-4);
+}
+
+.eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    color: var(--color-cyan);
+    margin-bottom: var(--space-3);
+    opacity: 0.85;
+}
+
+.hero-title {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(3.5rem, 12vw, 8rem);
+    letter-spacing: 0.05em;
+    line-height: 1;
+    background: linear-gradient(180deg, var(--color-white) 0%, var(--color-cyan) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    text-shadow: 0 0 60px rgba(92, 247, 255, 0.25);
+}
+
+.hero-subtitle {
+    font-family: var(--font-body);
+    font-weight: 400;
+    font-size: clamp(1rem, 2.5vw, 1.25rem);
+    color: var(--color-muted);
+    margin-top: var(--space-2);
+    letter-spacing: 0.02em;
+}
+
+/* ============================================
+   CTA BUTTON
+   Glow pulses on its own; brightens on hover.
+   ============================================ */
+.cta-button {
+    position: relative;
+    margin-top: var(--space-5);
+    padding: var(--space-3) var(--space-5);
+    background: transparent;
+    border: 1px solid var(--color-purple);
+    border-radius: 999px;
+    color: var(--color-white);
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: border-color 0.3s ease, transform 0.2s ease;
+    overflow: visible;
+}
+
+.cta-button:hover {
+    border-color: var(--color-cyan);
+    transform: translateY(-2px);
+}
+
+.cta-button:active {
+    transform: translateY(0);
+}
+
+.cta-glow {
+    position: absolute;
+    inset: -2px;
+    border-radius: 999px;
+    background: radial-gradient(ellipse at center, rgba(123, 47, 247, 0.4), transparent 70%);
+    z-index: -1;
+    animation: pulse-glow 3s ease-in-out infinite;
+}
+
+@keyframes pulse-glow {
+    0%, 100% { opacity: 0.5; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.15); }
+}
+
+.scroll-hint {
+    margin-top: var(--space-4);
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.05em;
+    color: var(--color-muted);
+    opacity: 0.6;
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+@media (max-width: 640px) {
+    .hud-frame { inset: var(--space-2); }
+    .hud-readout { font-size: 0.6rem; }
+    .hud-readout.top-left, .hud-readout.bottom-left { left: 24px; }
+    .hud-readout.top-right, .hud-readout.bottom-right { right: 24px; }
+    .cta-button { padding: var(--space-2) var(--space-4); }
+}

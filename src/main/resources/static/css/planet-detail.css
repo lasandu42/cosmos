@@ -1,0 +1,199 @@
+#starfield {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    background: var(--color-void);
+}
+
+.nebula {
+    position: fixed;
+    border-radius: 50%;
+    filter: blur(80px);
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0.6;
+    mix-blend-mode: screen;
+}
+
+.nebula-1 {
+    width: 600px;
+    height: 600px;
+    top: -10%;
+    left: -10%;
+    background: radial-gradient(circle, var(--planet-color), transparent 70%);
+    animation: drift-1 25s ease-in-out infinite;
+}
+
+.nebula-2 {
+    width: 500px;
+    height: 500px;
+    bottom: -10%;
+    right: -5%;
+    background: radial-gradient(circle, var(--planet-color-2), transparent 70%);
+    animation: drift-2 30s ease-in-out infinite;
+}
+@keyframes drift-1 {
+    0%, 100% { transform: translate(0, 0); }
+    50% { transform: translate(40px, 30px); }
+}
+
+@keyframes drift-2 {
+    0%, 100% { transform: translate(0, 0); }
+    50% { transform: translate(-30px, -40px); }
+}
+
+.back-link {
+    position: fixed;
+    top: var(--space-4);
+    left: var(--space-4);
+    z-index: 2;
+
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    letter-spacing: 0.05em;
+    text-decoration: none;
+    color: var(--color-muted);
+
+    padding: var(--space-2) var(--space-3);
+    border: 1px solid rgba(92, 247, 255, 0.2);
+    border-radius: 999px;
+
+    transition: color 0.25s ease, border-color 0.25s ease;
+}
+
+.back-link:hover {
+    color: var(--color-cyan);
+    border-color: var(--color-cyan);
+}
+.detail-layout {
+    position: relative;
+    z-index: 1;
+    min-height: 100vh;
+
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-5);
+
+    padding: var(--space-5) var(--space-4);
+}
+
+.detail-sphere-wrap {
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.detail-info {
+    flex: 1 1 400px;
+    max-width: 520px;
+}
+.detail-sphere {
+    width: 320px;
+    height: 320px;
+    border-radius: 50%;
+
+    background: radial-gradient(circle at 35% 30%, var(--planet-color), var(--planet-color-2) 55%, rgba(5, 8, 22, 0.9) 85%);
+    box-shadow:
+        0 0 80px var(--planet-color),
+        inset -20px -20px 60px rgba(0, 0, 0, 0.5);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    animation: slow-rotate 20s linear infinite;
+}
+
+@keyframes slow-rotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.detail-symbol {
+    font-size: 6rem;
+    color: rgba(255, 255, 255, 0.9);
+    text-shadow: 0 0 30px var(--planet-color);
+    animation: slow-rotate-reverse 20s linear infinite;
+}
+
+@keyframes slow-rotate-reverse {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(-360deg); }
+}
+.eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    color: var(--color-cyan);
+    margin-bottom: var(--space-2);
+}
+
+.detail-name {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    color: var(--color-white);
+    line-height: 1;
+}
+
+.detail-nickname {
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--planet-color);
+    margin-top: var(--space-2);
+}
+
+.detail-description {
+    font-family: var(--font-body);
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: var(--color-muted);
+    margin-top: var(--space-4);
+}
+
+.detail-stats {
+    display: flex;
+    gap: var(--space-5);
+    margin-top: var(--space-5);
+    padding-top: var(--space-4);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.detail-stat {
+    display: flex;
+    flex-direction: column;
+}
+
+.detail-stat-label {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    color: var(--color-muted);
+}
+
+.detail-stat-value {
+    font-family: var(--font-mono);
+    font-size: 1.5rem;
+    color: var(--planet-color);
+    margin-top: var(--space-1);
+}
+@media (max-width: 768px) {
+    .detail-layout {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .detail-sphere {
+        width: 220px;
+        height: 220px;
+    }
+
+    .detail-stats {
+        justify-content: center;
+    }
+}

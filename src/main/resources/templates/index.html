@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cosmos — Explore the Infinite Universe</title>
+
+    <!-- Google Fonts: display, body, and mono (HUD) typefaces -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Inter:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+    <!-- th:href lets Thymeleaf resolve the correct static path -->
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+    <link rel="stylesheet" th:href="@{/css/home.css}" />
+</head>
+<body>
+
+    <!-- Canvas the starfield gets drawn onto -->
+    <canvas id="starfield"></canvas>
+
+    <!-- HUD corner brackets: pure decoration, but this is what sells "cockpit" -->
+    <div class="hud-frame">
+        <span class="hud-corner tl"></span>
+        <span class="hud-corner tr"></span>
+        <span class="hud-corner bl"></span>
+        <span class="hud-corner br"></span>
+
+        <div class="hud-readout top-left">
+            <span id="hud-coords">LAT 00.0000 · LON 00.0000</span>
+        </div>
+        <div class="hud-readout top-right">
+            <span id="hud-clock">00:00:00 UTC</span>
+        </div>
+        <div class="hud-readout bottom-left">
+            SYS.STATUS <span class="hud-ok">ONLINE</span>
+        </div>
+        <div class="hud-readout bottom-right">
+            COSMOS OS <span class="hud-version">v1.0</span>
+        </div>
+    </div>
+
+    <main class="hero">
+        <p class="eyebrow">MISSION CONTROL // DEEP SPACE NETWORK</p>
+        <h1 class="hero-title">COSMOS</h1>
+        <p class="hero-subtitle">Explore the Infinite Universe</p>
+
+        <button id="begin-mission" class="cta-button">
+            <span class="cta-label">Begin Mission</span>
+            <span class="cta-glow"></span>
+        </button>
+
+        <p class="scroll-hint">Systems nominal. Awaiting launch command.</p>
+    </main>
+
+    <script th:src="@{/js/stars.js}"></script>
+    <script th:src="@{/js/main.js}"></script>
+</body>
+</html>

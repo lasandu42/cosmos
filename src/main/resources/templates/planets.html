@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cosmos — Navigation System</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Inter:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+    <link rel="stylesheet" th:href="@{/css/planets.css}" />
+</head>
+<body>
+
+<!-- Same starfield as the landing page -->
+<canvas id="starfield"></canvas>
+
+<!-- Nebula glow blobs, purely decorative, sit behind everything -->
+<div class="nebula nebula-1"></div>
+<div class="nebula nebula-2"></div>
+
+<header class="console-header">
+    <p class="eyebrow">COSMOS // NAVIGATION SYSTEM</p>
+    <h1 class="console-title">Choose Your Destination</h1>
+    <p class="console-subtitle">Select a celestial body to view mission telemetry</p>
+</header>
+
+<main class="planet-console">
+
+    <a class="planet-card" th:each="planet : ${planets}"
+       th:href="@{'/planets/' + ${#strings.toLowerCase(planet.name)}}">
+
+        <div class="planet-sphere" th:style="'--planet-color: ' + ${planet.themeColor} + '; --planet-color-2: ' + ${planet.themeColorSecondary}">
+            <span class="planet-symbol" th:text="${planet.symbol}">☉</span>
+        </div>
+
+        <h2 class="planet-name" th:text="${planet.name}">Planet</h2>
+        <p class="planet-nickname" th:text="${planet.nickname}">Nickname</p>
+
+        <p class="planet-description" th:text="${planet.description}">
+            Description.
+        </p>
+
+        <div class="planet-stats">
+            <div class="stat">
+                <span class="stat-label">GRAVITY</span>
+                <span class="stat-value" th:text="${planet.gravityPercent} + '%'">0%</span>
+            </div>
+            <div class="stat">
+                <span class="stat-label">MOONS</span>
+                <span class="stat-value" th:text="${planet.moonCount}">0</span>
+            </div>
+        </div>
+    </a>
+
+</main>
+
+<script th:src="@{/js/stars.js}"></script>
+
+
+</body>
+</html>

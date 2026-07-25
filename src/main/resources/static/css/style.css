@@ -1,0 +1,63 @@
+/* ============================================
+   DESIGN TOKENS
+   Centralizing these means every future page
+   (planets.html, about.html...) stays visually
+   consistent by just reusing these variables.
+   ============================================ */
+:root {
+    /* Colors */
+    --color-void: #050816;        /* main background */
+    --color-panel: #0b1330;       /* slightly-raised surface */
+    --color-purple: #7b2ff7;      /* accent: primary actions */
+    --color-cyan: #5cf7ff;        /* accent: glow / data highlights */
+    --color-white: #f5f6fa;       /* primary text */
+    --color-muted: #8a93b8;       /* secondary text */
+
+    /* Type */
+    --font-display: 'Space Grotesk', sans-serif;
+    --font-body: 'Inter', sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+
+    /* Spacing scale (multiples of 4px) */
+    --space-1: 0.4rem;
+    --space-2: 0.8rem;
+    --space-3: 1.6rem;
+    --space-4: 2.4rem;
+    --space-5: 4rem;
+}
+
+/* Reset: browsers ship inconsistent default margins/paddings.
+   Zeroing them out gives us a predictable starting point. */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+}
+
+body {
+    background: var(--color-void);
+    color: var(--color-white);
+    font-family: var(--font-body);
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* Respect users who've asked their OS to reduce motion */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* Visible keyboard focus - accessibility baseline, easy to forget */
+a:focus-visible,
+button:focus-visible {
+    outline: 2px solid var(--color-cyan);
+    outline-offset: 4px;
+}

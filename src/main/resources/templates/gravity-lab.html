@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cosmos — Gravity Lab</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Inter:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+    <link rel="stylesheet" th:href="@{/css/gravity-lab.css}" />
+</head>
+<body>
+
+<a href="/planets" class="back-link">&larr; Back to Navigation</a>
+
+<header class="lab-header">
+    <p class="eyebrow">COSMOS // GRAVITY LABORATORY</p>
+    <h1 class="lab-title">Orbital Simulation</h1>
+    <p class="lab-subtitle">Adjust mass. Observe gravity. Watch orbits emerge.</p>
+</header>
+
+<div class="lab-layout">
+
+    <!-- Controls panel: choose body count + mass, on the left -->
+    <div class="lab-controls">
+
+        <div class="control-group">
+            <label class="control-label">Orbiting Bodies</label>
+            <div class="body-count-buttons">
+                <button class="count-btn active" data-count="2">2</button>
+                <button class="count-btn" data-count="3">3</button>
+            </div>
+        </div>
+
+        <!-- Mass sliders get generated here by JS, since the number
+             of sliders depends on how many bodies are chosen above -->
+        <div id="mass-sliders" class="mass-sliders"></div>
+
+        <button id="launch-btn" class="launch-button">Launch Simulation</button>
+        <button id="reset-btn" class="reset-button">Reset</button>
+
+    </div>
+
+    <!-- The simulation itself -->
+    <div class="lab-canvas-wrap">
+        <canvas id="gravity-canvas"></canvas>
+    </div>
+
+</div>
+
+<script th:src="@{/js/gravity-lab.js}"></script>
+
+</body>
+</html>
