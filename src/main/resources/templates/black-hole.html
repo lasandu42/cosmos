@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Black Hole | COSMO</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+            href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Inter:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap"
+            rel="stylesheet"
+    >
+
+    <!-- Main COSMO CSS -->
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+
+    <!-- Black Hole CSS -->
+    <link rel="stylesheet" th:href="@{/css/black-hole.css}">
+</head>
+
+<body>
+
+<!-- Back button -->
+<a href="/" class="back-link">
+    ← Back to Navigation
+</a>
+
+<!-- Header -->
+<header class="bh-header">
+
+    <div class="bh-eyebrow">
+        GENERAL RELATIVITY / SCHWARZSCHILD
+    </div>
+
+    <h1 class="bh-title">
+        BLACK HOLE
+    </h1>
+
+    <p class="bh-subtitle">
+        Explore spacetime around a non-rotating black hole.
+    </p>
+
+    <p class="bh-instruction">
+        Drag to orbit • Scroll to zoom
+    </p>
+
+</header>
+
+
+<!-- Simulation -->
+<main class="bh-main">
+
+    <section class="bh-canvas-wrap">
+
+        <div id="bh-canvas-container"></div>
+
+        <!-- Information -->
+        <div class="bh-info">
+
+            <div class="bh-info-item">
+                <span class="info-label">MODEL</span>
+                <span class="info-value">SCHWARZSCHILD</span>
+            </div>
+
+            <div class="bh-info-item">
+                <span class="info-label">EVENT HORIZON</span>
+                <span class="info-value">1 Rₛ</span>
+            </div>
+
+            <div class="bh-info-item">
+                <span class="info-label">PHOTON SPHERE</span>
+                <span class="info-value">1.5 Rₛ</span>
+            </div>
+
+            <div class="bh-info-item">
+                <span class="info-label">ISCO</span>
+                <span class="info-value">3 Rₛ</span>
+            </div>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+<!-- Three.js -->
+<script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
+
+<!-- Our black hole renderer -->
+<script th:src="@{/js/black-hole.js}"></script>
+
+</body>
+</html>
