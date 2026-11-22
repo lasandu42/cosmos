@@ -1,4 +1,7 @@
 package com.cosmos.model;
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class Planet {
 
@@ -12,6 +15,7 @@ public class Planet {
     private String themeColor;
     private String themeColorSecondary;
 
+    private List<DetailSection> detailSections = new ArrayList<>();
     //Constructor
     public Planet(String name, String nickname, String description, double gravityPercent, int moonCount,String symbol,String themeColor,String themeColorSecondary){
         this.name =name;
@@ -55,5 +59,14 @@ public class Planet {
 
     public String getThemeColorSecondary() {
         return themeColorSecondary;
+    }
+
+
+    //Methods
+    public void addDetailSection(String title,String content){
+        detailSections.add(new DetailSection(title,content));
+    }
+    public List<DetailSection> getDetailSections() {
+        return detailSections;
     }
 }
