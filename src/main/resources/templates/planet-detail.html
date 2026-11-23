@@ -23,8 +23,8 @@
 <main class="detail-layout">
 
     <div class="detail-sphere-wrap">
-        <div class="detail-sphere">
-            <span class="detail-symbol" th:text="${planet.symbol}">☉</span>
+        <div id="planet-sphere-container"
+             th:attr="data-planet-name=${#strings.toLowerCase(planet.name)}">
         </div>
     </div>
 
@@ -57,7 +57,9 @@
 
 </main>
 
+<script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
 <script th:src="@{/js/stars.js}"></script>
+<script th:src="@{/js/planet-sphere.js}"></script>
 
 </body>
 </html>

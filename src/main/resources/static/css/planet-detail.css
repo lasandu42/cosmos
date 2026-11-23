@@ -90,38 +90,14 @@
     flex: 1 1 400px;
     max-width: 520px;
 }
-.detail-sphere {
-    width: 320px;
-    height: 320px;
-    border-radius: 50%;
-
-    background: radial-gradient(circle at 35% 30%, var(--planet-color), var(--planet-color-2) 55%, rgba(5, 8, 22, 0.9) 85%);
-    box-shadow:
-        0 0 80px var(--planet-color),
-        inset -20px -20px 60px rgba(0, 0, 0, 0.5);
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    animation: slow-rotate 20s linear infinite;
+#planet-sphere-container {
+    width: 340px;
+    height: 340px;
+    position: relative;
 }
 
-@keyframes slow-rotate {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
-}
-
-.detail-symbol {
-    font-size: 6rem;
-    color: rgba(255, 255, 255, 0.9);
-    text-shadow: 0 0 30px var(--planet-color);
-    animation: slow-rotate-reverse 20s linear infinite;
-}
-
-@keyframes slow-rotate-reverse {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(-360deg); }
+#planet-sphere-container canvas {
+    display: block;
 }
 .eyebrow {
     font-family: var(--font-mono);
@@ -188,9 +164,9 @@
         text-align: center;
     }
 
-    .detail-sphere {
-        width: 220px;
-        height: 220px;
+    #planet-sphere-container {
+        width: 240px;
+        height: 240px;
     }
 
     .detail-stats {
