@@ -92,6 +92,51 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     );
 
+        // ---- Saturn only: tilted rings ----
+        if (planetName === 'saturn') {
+            // Pull the camera back and raise it a little so the rings open up
+            // into an ellipse instead of being seen edge-on as a thin line.
+            camera.position.set(0, 1.5, 6.2);
+            camera.lookAt(0, 0, 0);
+            pivot.rotation.z = 0.47; // Saturn's real axial tilt is about 27 degrees
+
+            const inner = 1.24; // ring edges as multiples of Saturn's radius
+            const outer = 2.33;
+            const ringGeometry = new THREE.RingGeometry(inner, outer, 128);
+
+            // RingGeometry's default UVs are flat ("billboard"), which would
+            // smear the ring texture. Our texture is a strip of colour by radius,
+            // so set u = how far this vertex is from inner edge to outer edge.
+            const pos = ringGeometry.attributes.position;
+            const uv = ringGeometry.attributes.uv;
+            const p = new THREE.Vector3();
+            for (let i = 0; i < pos.count; i++) {
+                p.fromBufferAttribute(pos, i);
+                uv.setXY(i, (p.length() - inner) / (outer - inner), 0.5);
+            }
+
+            new THREE.TextureLoader().load(
+                '/images/planets/saturn-ring.png',
+                (ringTexture) => {
+                    ringTexture.colorSpace = THREE.SRGBColorSpace;
+                    const ring = new THREE.Mesh(
+                        ringGeometry,
+                        new THREE.MeshBasicMaterial({
+                            map: ringTexture,
+                            side: THREE.DoubleSide, // visible from above and below
+                            transparent: true,
+                            depthWrite: false,
+                        })
+                    );
+                    ring.rotation.x = -Math.PI / 2; // RingGeometry is vertical; lay it flat
+                    pivot.add(ring);
+                },
+                undefined,
+                (error) => console.error('Could not load /images/planets/saturn-ring.png', error)
+            );
+        }
+
+
     // ---- Render loop ----
     function animate() {
         requestAnimationFrame(animate);
