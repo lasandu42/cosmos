@@ -1,0 +1,4 @@
+.apod-media img,
+.apod-media iframe {
+    max-width: 100%;
+}

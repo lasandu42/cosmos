@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cosmos — CERN Open Data</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Inter:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" th:href="@{/css/style.css}" />
+  <link rel="stylesheet" th:href="@{/css/cern.css}" />
+</head>
+<body>
+
+<canvas id="starfield"></canvas>
+<div class="nebula nebula-1"></div>
+<div class="nebula nebula-2"></div>
+
+<a href="/planets" class="back-link">&larr; Back to Navigation</a>
+
+<main class="cern-page">
+
+  <header class="cern-header">
+    <p class="eyebrow">COSMOS // LARGE HADRON COLLIDER</p>
+    <h1 class="cern-heading">CERN Open Data</h1>
+    <p class="cern-sub">Real data from the LHC experiments, released openly for anyone to study.</p>
+  </header>
+
+  <nav class="exp-tabs">
+    <a class="exp-tab" th:each="e : ${experiments}"
+       th:href="@{/cern(experiment=${e.code()})}"
+       th:text="${e.code()}"
+       th:classappend="${e.code() == selected.code()} ? 'active'">CMS</a>
+  </nav>
+
+  <section class="exp-intro">
+    <h2 th:text="${selected.name()}">Name</h2>
+    <p th:text="${selected.blurb()}">Blurb</p>
+  </section>
+
+  <section class="dataset-list" th:if="${!datasets.isEmpty()}">
+    <article class="dataset-card" th:each="d : ${datasets}">
+      <h3 class="dataset-title" th:text="${d.title()}">Title</h3>
+      <p class="dataset-desc" th:text="${d.description()}">Description</p>
+
+      <ul class="dataset-facts">
+        <li th:if="${d.datePublished() != null}">Published: <span th:text="${d.datePublished()}">2012</span></li>
+        <li th:if="${d.events() != null}">Events: <span th:text="${#numbers.formatInteger(d.events(), 1, 'COMMA')}">0</span></li>
+        <li th:if="${d.files() != null}">Files: <span th:text="${d.files()}">0</span></li>
+        <li th:if="${d.readableSize() != null}">Size: <span th:text="${d.readableSize()}">0</span></li>
+      </ul>
+
+      <p class="dataset-authors" th:if="${d.authorLine() != null}">
+        By <span th:text="${d.authorLine()}">Author</span>
+      </p>
+
+      <p class="dataset-cite">
+                <span th:if="${d.doi() != null}">
+                    Cite: DOI
+                    <a th:href="${d.doiUrl()}" target="_blank" rel="noopener noreferrer" th:text="${d.doi()}">doi</a>
+                </span>
+        <span th:unless="${d.doi() != null}">
+                    Reference: CERN Open Data Portal, record
+                    <a th:href="${d.portalUrl()}" target="_blank" rel="noopener noreferrer" th:text="${d.recid()}">0</a>
+                </span>
+      </p>
+
+      <a class="dataset-link" th:href="${d.portalUrl()}" target="_blank" rel="noopener noreferrer">
+        View on CERN Open Data &rarr;
+      </a>
+    </article>
+  </section>
+
+  <p class="cern-empty" th:if="${datasets.isEmpty()}">
+    No datasets could be loaded from CERN right now. Please try again in a little while.
+  </p>
+
+  <p class="cern-footer">
+    Data: CERN Open Data Portal (opendata.cern.ch). Neither CERN nor the experiments endorse works made with
+    these data. Please cite the DOI when you reuse a dataset.
+  </p>
+
+</main>
+<script th:src="@{/js/stars.js}"></script>
+</body>
+</html>

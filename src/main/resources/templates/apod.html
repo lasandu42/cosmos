@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cosmos — Picture of the Day</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Inter:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+    <link rel="stylesheet" th:href="@{/css/apod.css}" />
+</head>
+<body>
+<canvas id="starfield"></canvas>
+<div class="nebula nebula-1"></div>
+<div class="nebula nebula-2"></div>
+
+<a href="/planets" class="back-link">&larr; Back to Navigation</a>
+
+<main class="apod-page">
+
+    <header class="apod-header">
+        <p class="eyebrow">COSMOS // DEEP SPACE FEED</p>
+        <h1 class="apod-heading">Picture of the Day</h1>
+    </header>
+
+    <article class="apod-card" th:if="${apod != null}">
+
+        <figure class="apod-media" th:if="${apod.showsImage()}">
+            <img th:src="${apod.imageSource()}"
+                 th:alt="${apod.alt() != null ? apod.alt() : apod.title()}" />
+        </figure>
+
+        <div class="apod-media" th:if="${apod.showsVideo()}">
+            <iframe th:if="${apod.canEmbedVideo()}" th:src="${apod.url()}"
+                    th:title="${apod.title()}" allowfullscreen></iframe>
+
+            <a th:unless="${apod.canEmbedVideo()}" th:href="${apod.permalink()}"
+               target="_blank" rel="noopener noreferrer" class="apod-poster">
+                <img th:if="${apod.hdurl() != null}" th:src="${apod.hdurl()}"
+                     th:alt="${apod.title()}" />
+                <span class="apod-play">&#9654; Watch the video on NASA</span>
+            </a>
+        </div>
+
+        <div class="apod-body">
+            <p class="apod-date" th:text="${apod.date()}">2026-01-01</p>
+            <h2 class="apod-title" th:text="${apod.title()}">Title</h2>
+            <div class="apod-explanation" th:utext="${apod.explanation()}">Explanation.</div>
+
+            <p class="apod-credit" th:if="${apod.credit() != null}">
+                <span class="apod-credit-label">Image credit:</span>
+                <span th:utext="${apod.credit()}">Credit</span>
+            </p>
+
+            <a th:if="${apod.permalink() != null}" th:href="${apod.permalink()}"
+               target="_blank" rel="noopener noreferrer" class="apod-source">View on NASA &rarr;</a>
+        </div>
+    </article>
+
+    <p class="apod-error" th:unless="${apod != null}">
+        NASA's picture of the day isn't available right now. Please try again in a little while.
+    </p>
+
+    <p class="apod-footer">Source: NASA Astronomy Picture of the Day. Image rights belong to the credited owners.</p>
+
+</main>
+<script th:src="@{/js/stars.js}"></script>
+</body>
+</html>
